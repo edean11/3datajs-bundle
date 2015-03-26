@@ -23,7 +23,7 @@ Installation
 
 To Install 3Datajs, install the dependencies above into your project folder then include the 3data.js file or simply use bower as shown below:
 
-``bower install 3datajs --save``
+``bower install 3datajs-bundle --save``
 
 Using 3Datajs
 -------------
