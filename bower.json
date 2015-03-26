@@ -1,0 +1,23 @@
+{
+  "name": "3datajs-bundle",
+  "version": "0.1",
+  "homepage": "https://github.com/edean11/3datajs-bundle",
+  "authors": [
+    "Ed Dean <edean1010@gmail.com>"
+  ],
+  "description": "3datajs bundled with its dependencies",
+  "main": "build/3data.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "threejs": "*",
+    "lodash": "~3.5.0"
+  }
+}
