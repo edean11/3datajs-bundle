@@ -172,7 +172,7 @@ allOptions = {
 
 - linkColorFunction = similar to the above, this takes in each individual data point as an argument, thus allowing the user to color links based off of any property in the data set
 
-- linkColorFunction = similar to the above, this takes in each individual data point as an argument, thus allowing the user to run any custom function upon the dblClick event. (note: the node argument for this function is slightly different than the above.  Console.log the result to find its structure)
+- dblClickFunction = similar to the above, this takes in each individual data point as an argument, thus allowing the user to run any custom function upon the dblClick event. (note: the node argument for this function is slightly different than the above.  Console.log the result to find its structure)
 
 - renderSizeWidth,renderSizeHeight = sets the width and height of the rendered scene, only used if a renderTarget was defined
 
