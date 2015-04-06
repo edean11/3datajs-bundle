@@ -23,7 +23,7 @@ Installation
 
 To Install 3Datajs, install the dependencies above into your project folder then include the 3data.js file or simply use bower as shown below:
 
-``bower install 3datajs-bundle --save``
+``bower install 3datajs --save``
 
 Using 3Datajs
 -------------
@@ -41,69 +41,59 @@ This object can contain a wide variety of available output options as defined by
 
 ## Example
 
-###### Sample Data Object with popup function
+###### Sample Data Object With Name
 
 ```
-var popup = function(name){
-  var elem = document.createElement('div');
-  elem.className = 'infoBox';
-  elem.innerHTML = name;
-  return elem;
-}
-
 data = {
 	1: {
-		name: 'test1',
-		color: 'blue',
-		size: 3,
-		links: [2,4],
-		popup: popup(this.name)
+		name: 'test1'
 	},
 	2: {
-		name: 'test2',
-		color: 'green',
-		size: 2,
-		links: [4,5],
-		popup: popup(this.name)
+		name: 'test2'
 	},
 	3: {
-		name: 'test3',
-		color: 'yellow',
-		size: 5,
-		links: [2,1],
-		popup: popup(this.name)
+		name: 'test3'
 	},
 	4: {
-		name: 'test4',
-		color: 'red',
-		size: 1,
-		links: [2,3],
-		popup: popup(this.name)
+		name: 'test4'
 	},
 	5: {
-		name: 'test5',
-		color: 'blue',
-		size: 3,
-		links: [1,4],
-		popup: popup(this.name)
+		name: 'test5'
 	},
 }
 ```
 
-Each data point's name, color and size properties may be called anything the user desires and more properties of any nature may be added to each object. The only hard coded property name is the links property as described above.
-
 ###### Sample Options Object
-> All available options are included below, but the only required
-> property is positioningType and any associated sub-requirements
-> for that positioningType
 
 ```
 options = {
+  //place the nodes in a random position
+  positioningType: random
+}
+
+```
+
+###### Creating the scene
+
+Now that we have a data and options object, all we have to do to create a 3datajs scene is pass those two objects as arguments to the _3DATA.create() function
+
+``_3DATA.create(data,options)``
+
+Congratulations! You have just created your first 3datajs scene!
+
+## Available Options
+
+```
+allOptions = {
 	rendererTarget: null,
     hasAmbientLight : true,
     hasDirectionalLight : false,
+    hasDblClickZoom : true,
+    dblClickAppendPopup : true,
+    popupRendererContainerClass : 'testContainer',
     showLinks : false,
-    autoAppendPopup : false
+    autoAppendPopup : false,
+    zoomSpeed : 0.5,
     // random, automatic, grouped, or defined
     positioningType : 'automatic',
       //if automatic
@@ -131,8 +121,8 @@ options = {
     renderSizeWidth : null,
     renderSizeHeight : null,
     nodeSize : 2,
-    nodeWidthSegments : 128,
-    nodeHeightSegments : 128,
+    nodeWidthSegments : 32,
+    nodeHeightSegments : 32,
     maxBound : 10000,
     xSpread : 40,
     ySpread : 40,
@@ -140,6 +130,9 @@ options = {
     backgroundType : 'color', //image or color
     backgroundColor : [0,0,0],
     backgroundImage : 'http://i.imgur.com/x4egEw1.jpg',
+    backgroundRotationX : -0.9,
+    backgroundRotationY : -0.5,
+    backgroundRotationZ : 0.4,
     nodeColor : [0,1,0],
     nodeHighlightColor : [1,0,0],
     linkColor : [0,0,1],
@@ -199,7 +192,7 @@ options = {
 
 - nodeColor = default node color if nodeColorFunction returns undefined for any data point
 
-- nodeHighlightColor = RGB array for the color of the node when selected
+- nodeHighlightColor = RGB array or hex string for the color of the node when selected. If left blank, the object will not be highlighted
 
 - linkColor = RGB array for the default link color if linkColorFunction returns undefined for any data point
 
@@ -215,13 +208,6 @@ options = {
 
 - wireframeWidth = if wireframeMesh === true, this determines the width of each wireframe
 
-###### Creating the scene
-
-Now that we have a data and options object, all we have to do to create a 3datajs scene is pass those two objects as arguments to the _3DATA.create() function
-
-``_3DATA.create(data,options)``
-
-Congratulations! You have just created your first 3datajs scene!
 
 ## User Facing Functions
 
@@ -233,6 +219,10 @@ Congratulations! You have just created your first 3datajs scene!
 > their newly created scene
 
 - _3DATA.render() = takes no arguments.  This function forces the re-rendering of the scene in order to show any changes made to the scene
+
+- _3DATA.appendPopup(node,remove) = Shows the popup for the node passed into hte function. The remove argument takes a true or false value determining whether the popup is removed when a new one is created.
+
+- _3DATA.getSkyBox() = Takes no arguments. Returns the skybox with its properties.
 
 - _3DATA.getCamera() = takes no arguments. This returns the camera object with all its useful properties to be examined or manipulated
 
@@ -246,4 +236,13 @@ Congratulations! You have just created your first 3datajs scene!
 
 - _3DATA.zoomPosition(position,zoomOut) = this allows the user to zoom into any particular point in the scene.  Simply provide the position in an x,y,z array (i.e. [10,12,100]) and the amount to zoom out once zoomed in on that position
 
+- _3DATA.removePopup(meshName,popupName) = Removes the popup and corresponding mesh passed into the function from the scene. If no parameters are given, it removes the first(or only) popup appended.
+
 - _3DATA.revertColor(revertNode) = this allows the user to revert a node's color back to its original color.  Simply pass in the entire node object into the function.
+
+
+
+
+
+
+
