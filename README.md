@@ -85,74 +85,79 @@ Congratulations! You have just created your first 3datajs scene!
 
 ```
 allOptions = {
-    rendererTarget: null,
+    rendererTarget: '.container',
     hasAmbientLight : true,
-    hasDirectionalLight : false,
+    hasDirectionalLight : true,
     hasDblClickZoom : true,
-    dblClickAppendPopup : true,
+    dblClickAppendPopup : false,
     popupRendererContainerClass : 'testContainer',
-    showLinks : false,
-    autoAppendPopup : false,
-    zoomSpeed : 0.5,
+    showLinks : true,
+    autoAppendPopup : true,
+    respondToWindowResizing : true,
+    zoomSpeed : 0.4,
     zoomAutoRotate : false,
-    // random, automatic, grouped, or defined
-    positioningType : 'automatic',
+    positioningType : 'random', //random, automatic, grouped, or defined
       //if automatic
-      groupSize : 2,
+        groupSize : 1,
       //if grouped
-      groupingVariable: 'group',
-      groupingDensity: 30,
+        groupingVariable: 'group',
+        groupingDensity: 30,
       //if defined
-      positioningVariable: 'position',
-    nodeColorFunction : function(node){
-        return node.color;
-    },
-    nodeSizeFunction : function(node){
-        return [node.links.length,node.links.length,node.links.length];
-    },
-    nodePopupFunction : function(node){
-        return node.popup;
-    },
-    linkColorFunction : function(srcNode){
-        return srcNode.linkColor;
-    },
-    dblClickFunction : function(clickedNode){
-      return clickedNode.userData.nodeInfo.exampleFunction();
-    },
-    customGeometryFunction : function(){
+        positioningVariable: 'position',
+      //if carousel
+        carouselSize : 20,
+        carouselOrientation : 'vertical',
+     nodeColorFunction : function(node){
+         return node.nodeColor;
+     },
+     nodeSizeFunction : function(node){
+         return node.nodeSize;
+     },
+     nodePopupFunction : function(node){
+         return node.popup;
+     },
+     linkColorFunction : function(srcNode){
+         return srcNode.linkColor;
+     },
+     customGeometryFunction : function(){
          var box = new THREE.BoxGeometry(100,100,100);
          return box;
-    },
-    renderSizeWidth : null,
-    renderSizeHeight : null,
-    nodeSize : [2,2,2],
-    nodeWidthSegments : 32,
-    nodeHeightSegments : 32,
-    nodeDepthSegments : 32,
-    maxBound : 10000,
-    xSpread : 40,
-    ySpread : 40,
-    zSpread : 40,
-    backgroundType : 'color', //image or color
-    backgroundColor : [0,0,0],
-    backgroundImage : 'http://i.imgur.com/x4egEw1.jpg',
-    backgroundRotationX : -0.9,
-    backgroundRotationY : -0.5,
-    backgroundRotationZ : 0.4,
+     },
+     geometryTypeFunction : function(node){
+         return node.geometry
+     },
+    defaultGeometryType : 'Box',
+    //nodeSize is an array of three numbers if 'Box', one number(radius) if 'Sphere'
+      nodeSize : [4,4,4],
+    //affect resolution of nodes
+      nodeWidthSegments : 32,
+      nodeHeightSegments : 32,
+      nodeDepthSegments : 32,
+    nodeRotationVar : 'rotation',
+    maxBound : 1000,
+    xSpread : 10,
+    ySpread : 5,
+    zSpread : 5,
+    backgroundType : 'image', //image or color
+      //background color and background image can be one image or color,
+      //or an array of 6 images or colors
+      //corresponding to the faces of the skybox ['left','right','top','bottom','back','front']
+      backgroundColor : ['0x696969','0x696969','0x696969','0x696969','0x696969','0x696969'],
+      backgroundImage : 'img/stars.jpeg',
+      //backgroundImage : ['img/stars.jpeg','img/recordcollection.jpg','img/stars.jpeg','img/recordcollection.jpg','img/stars.jpeg','img/recordcollection.jpg'],
     nodeColor : [0,1,0],
     nodeHighlightColor : [1,0,0],
-    linkColor : [0,0,1],
+    linkColor : 0x00ff00,
     ambientLightColor : 0x404040,
     directionalLightColor : 0x808080,
     directionalLightPosX : 1,
     directionalLightPosY : 1,
     directionalLightPosZ : 1,
-    materialType : 'Phong', // Phong,Lambert, or Basic
-    geometryType : 'Box', // Sphere, Box or Custom
-    meshPosX : 2+(2*1.5),
-    meshPosY : -1,
-    meshPosZ : -2,
-    wireframeMesh: true,
+    materialType : 'Phong',
+    meshPosX : 0,
+    meshPosY : 0,
+    meshPosZ : 0,
+    wireframeMesh: false,
     wireframeWidth: 1
 }
 ```
@@ -262,10 +267,3 @@ allOptions = {
 - _3DATA.revertColor(revertNode) = this allows the user to revert a node's color back to its original color.  Simply pass in the entire node object into the function.
 
 - _3DATA.stopAutoRotate() = stops auto rotation when called.
-
-
-
-
-
-
-
